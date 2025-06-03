@@ -2,12 +2,14 @@
 # 19 May 2025 
 # Jenny Cribbs
 # Based on tutorial: https://tgoodbody.github.io/lidRtutorial/
+# NEed to start with step 1!
 
-# Clear environment
+# clear environment
 rm(list = ls(globalenv()))
 
 # Load packages
 library(lidR)
+library(microbenchmark)
 library(sf)
 library(terra)
 library(tidyverse)
@@ -34,10 +36,43 @@ trees_sf <- st_as_sf(trees, coords = c("verbatimLongitude", "verbatimLatitude"),
 # filter trees for Hooper Peak Plot only
 trees_sf_YPE75 <- filter(trees_sf, eventID == 75)
 
-# Read in LiDAR file for plot 75 Hooper Peak and set some color palettes
-las_raw <- readLAS("dataSandbox/SpatialData/Lidar/USGS_LPC_CA_YosemiteNP_2019_D19_11SKB5385.laz",  filter = "-set_withheld_flag 0")
-col <- height.colors(50)
-col1 <- pastel.colors(900)
+# bring in lidar data from USGS
+#las <- readLAS(center_laz, select='xyzicr', filter = "-drop_class 18 -drop_class 7 -keep_first")
+
+# Read in LiDAR file for plot 75 Hooper Peak and drop class 7 and 18 (likely noise)
+las_raw <- readLAS(files = "dataSandbox/SpatialData/Lidar/USGS_LPC_CA_YosemiteNP_2019_D19_11SKB5385.laz",  select = "xyzicr", filter = "-drop_class 18 -drop_class 7 -keep_first")
+col <- height.colors(50) # set color palettes
+#col1 <- pastel.colors(900)
+
+# further noise filtering with classify noise
+las_raw <- classify_noise(las_raw, sor(k = 10, m = 3, quantile = FALSE))
+# remove class 18 from the above step
+las_raw <- filter_poi(las_raw, Classification != 18)
+# normalize height using ground returns
+las_norm <- normalize_height(las_raw, knnidw())
+# create canopy height model by rasterizing
+chm <- lidR::rasterize_canopy(las_norm, res = 1, p2r(subcircle = 0.075))
+
+# returns point Z geometry for the sf object
+ttops_chm <- locate_trees(las = chm, algorithm = lmf(6)) # lmf and manual are algorithms for tree detection
+# define algorithm for segmenting trees
+algo <- dalponte2016(chm, ttops_chm)
+# segment trees
+las2 <- segment_trees(las_norm, algo)
+# define crowns
+crowns <- crown_metrics(las2, func = .stdmetrics, geom = "convex")
+
+ 
+# define file name for crown polygons
+outcrowns = "/Users/jennifercribbs/Documents/R-Projects/MultipleDisturbances/outputSandbox/crowns.shp"
+# write out crown polygons (table with geometry)
+st_write(crowns, outcrowns, append=F)
+# define file name for canopy height model
+outchm = "/Users/jennifercribbs/Documents/R-Projects/MultipleDisturbances/outputSandb/crowns.tif"
+# write out canopy height model
+writeRaster(chm, outchm, overwrite=T)
+
+
 
 # generate digital terrain model
 dtm <- rasterize_terrain(filter_poi(las, Classification == 2), res = 0.5, algorithm = knnidw())

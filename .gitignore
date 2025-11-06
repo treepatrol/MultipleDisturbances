@@ -21,7 +21,6 @@ __pycache__/
 *.xlsm
 *.png
 *.jpg
-Data/
 
 # Folders for intermediate or scratch work
 scratch/

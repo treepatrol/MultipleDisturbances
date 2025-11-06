@@ -68,7 +68,7 @@ outcrowns = "/Users/jennifercribbs/Documents/R-Projects/MultipleDisturbances/out
 # write out crown polygons (table with geometry)
 st_write(crowns, outcrowns, append=F)
 # define file name for canopy height model
-outchm = "/Users/jennifercribbs/Documents/R-Projects/MultipleDisturbances/outputSandb/crowns.tif"
+outchm = "/Users/jennifercribbs/Documents/R-Projects/MultipleDisturbances/outputSandbox/crowns.tif"
 # write out canopy height model
 writeRaster(chm, outchm, overwrite=T)
 

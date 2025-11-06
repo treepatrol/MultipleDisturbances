@@ -36,3 +36,4 @@ Scripts_backup/
 !README.md  # Example: ensures README is always tracked
 
 .Rproj.user
+Data/

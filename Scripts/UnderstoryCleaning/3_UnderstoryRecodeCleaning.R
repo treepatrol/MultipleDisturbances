@@ -33,7 +33,7 @@ all_plots_understory <- all_plots_understory %>% mutate(hitNum = case_when(
 #Still needs full check with full Unknown Veg Notes
 
 #read in Unknown Veg csv file
-unkVeg <- read_csv("dataSandbox/Dictionaries/Unknown Veg Notes - UnknownPlants.csv")
+unkVeg <- read_csv("/Users/jennifercribbs/Documents/R-Projects/MultipleDisturbances/dataSandbox/CleanData/Unknown Veg Notes - UnknownPlants.csv")
 names(unkVeg) <- gsub(" ", "_", names(unkVeg))
 #keep only relevant columns and YOSE rows
 unkVeg <- unkVeg %>% select(project, asEntered, code, bestGuess, confidentTo, nextSteps, plotID) %>% filter(project == "YOSE")
@@ -272,23 +272,23 @@ all_plots_understory <- forbfest
 ##-------- Part 4: Use Species Code Dictionary & Taxonstand to apply scientific names --------
 
 #read in Species Code Dictionary csv file
-spDict <- read_csv("dataSandbox/Dictionaries/Species Code Dictionary - Sheet1.csv")
+spDict <- read_csv("/Users/jennifercribbs/Documents/R-Projects/MultipleDisturbances/Data/Dictionaries/Species Code Dictionary - Species Code Dictionary.csv")
 #remove ` in column names
 names(spDict) <- gsub("`", "", names(spDict))
 
 #keep only relevant columns
-spDict <- spDict %>% mutate(inProject = case_when(
-  !is.na(...12) ~ paste(inProject, ...12, sep = ", "),
-  TRUE ~ inProject)) %>% 
-  select(code, scientificName, lifeForm, nativeVsIntroduced, annualVsPerennial, inProject)
+#spDict <- spDict %>% mutate(inProject = case_when(
+  #!is.na(...12) ~ paste(inProject, ...12, sep = ", "),
+  #TRUE ~ inProject)) %>% 
+  #select(code, scientificName, lifeForm, nativeVsIntroduced, annualVsPerennial, inProject)
 
 #use merge to map codes in dictionary to codes in df
-all_plots_understory <- merge(all_plots_understory, spDict, by.x = "species", by.y = "code", all.x = T) #CHANGE BACK TO TRUE to keep all vals
-all_plots_understory <- all_plots_understory %>% 
-  mutate(species = case_when(
-    !is.na(all_plots_understory$scientificName) ~ all_plots_understory$scientificName, #is.na doesn't work still - converts a bunch of data to na
-    TRUE ~ species
-  )) %>% select(!scientificName)
+#all_plots_understory <- merge(all_plots_understory, spDict, by.x = "species", by.y = "code", all.x = T) #CHANGE BACK TO TRUE to keep all vals
+#all_plots_understory <- all_plots_understory %>% 
+  #mutate(species = case_when(
+    #!is.na(all_plots_understory$scientificName) ~ all_plots_understory$scientificName, #is.na doesn't work still - converts a bunch of data to na
+    #TRUE ~ species
+ # )) %>% select(!scientificName)
 
 #check species names
 unique(all_plots_understory$species)

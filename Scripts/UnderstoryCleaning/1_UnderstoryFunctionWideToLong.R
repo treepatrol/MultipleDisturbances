@@ -14,7 +14,7 @@
 
 # set working directory to project dir 
 #setwd("/Users/jennifercribbs/Documents/YOSE/Analysis/MultipleDisturbances")
-setwd("C:/Users/tazli/Downloads/YOSE_SugarPine/MultipleDisturbances")
+setwd("/Users/jennifercribbs/Documents/R-Projects/MultipleDisturbances/Data/RawData/YPE_Data")
 
 # Read function into the global environment 
 convert_understory_data_to_long <- function(understory_data) {

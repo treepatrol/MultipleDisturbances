@@ -16,9 +16,10 @@ library(VIM)
 library(dplyr)
 library(tidyverse)
 library(lubridate)
+library(here)
 
 # Set the working directory
-setwd("/Users/jennifercribbs/Documents/YOSE/Analysis/MultipleDisturbances/")
+#setwd("/Users/jennifercribbs/Documents/YOSE/Analysis/MultipleDisturbances/")
 #setwd("/Users/tazli/Downloads/YOSE_SugarPine/MultipleDisturbances")
 
 # Bring in the PILA data for each plot in the project folder from Google Sheets

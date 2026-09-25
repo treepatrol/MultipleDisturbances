@@ -1,6 +1,6 @@
 
 # packages
-install.packages(c("ggplot2", "ggpubr", "tidyverse", "broom", "AICcmodavg"))
+#install.packages(c("ggplot2", "ggpubr", "tidyverse", "broom", "AICcmodavg"))
 library(ggplot2)
 library(ggpubr)
 library(tidyverse)
@@ -11,15 +11,15 @@ library(AICcmodavg)
 understoryRich <- read.csv("prismFireRichness.csv")
 
 # read in manually reviewed fire severity (MTBS, plot assessment, plot photos)
-fireSeverityChecked <- read.csv("/Users/jennifercribbs/Documents/YOSE/Analysis/MultipleDisturbances/fireCompare_22052024.csv")
+fireSeverityChecked <- read.csv("/Users/jennifercribbs/Documents/R-Projects/MultipleDisturbances/dataSandbox/fireCompare_22052024.csv")
 # read in data from PlotLevelData.R
 
 understoryFire <- fireSeverityChecked %>% select(plotID, mtbs_severity, Fire_Severity_Beg, Fire_Severity_plotAverge) %>% left_join(understoryRich) %>% select(-severity)
 
-treelist <- read.csv("treelist.csv")
+#treelist <- read.csv("dataSandbox/treelist.csv")
 
 # join on the ground fire data with richness and other plot data
-understoryFire <- left_join(understoryFire, treelist)
+#understoryFire <- left_join(understoryFire, treelist)
 
 # Boxplots for MTBS Fire Severity ------------------------------------------------
 # take a look at relationship btw richness and MTBS fire severity
@@ -82,7 +82,7 @@ plot(understoryFire$richness ~ understoryFire$Fire_Severity_Beg)
 abline(lm(richness ~ Fire_Severity_Beg + time_since + vpdmax + tmean + ppt, data = understoryFire))
 
 # read in manually reviewed data
-fireCompare <- read.csv("/Users/jennifercribbs/Documents/YOSE/Analysis/MultipleDisturbances/fireCompare_11052024JEC.csv") 
+fireCompare <- read.csv("/Users/jennifercribbs/Documents/R-Projects/MultipleDisturbances/dataSandbox/fireCompare_11052024JEC.csv") 
 
 ggplot(understoryFire, aes(x = as.factor(Fire_Severity_Beg), y = richness, fill = as.factor(Fire_Severity_Beg))) +
   geom_boxplot(notch = FALSE) +
@@ -93,6 +93,7 @@ ggplot(understoryFire, aes(x = as.factor(Fire_Severity_Beg), y = richness, fill 
   guides(fill = guide_legend(title = "Fire Severity"))
 
 aov(richness ~ Fire_Severity_Beg, data = understoryFire)
+summary(aov(richness ~ Fire_Severity_Beg, data = understoryFire))
 
-lm(understoryFire$richness ~ understoryFire$Plot_Severity_Beg)
+#lm(understoryFire$richness ~ understoryFire$Plot_Severity_Beg)
 

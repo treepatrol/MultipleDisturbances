@@ -25,7 +25,7 @@ all_plots_understory <- all_plots_understory %>% mutate(hitNum = case_when(
   pin_vs_assoc == "pin" ~ hitNum,
   pin_vs_assoc == "assoc" ~ NA,
   TRUE ~ NA
-)) %>% ungroup () %>% select(!id)
+)) %>% ungroup () %>% dplyr::select(!id)
 
 ##---------------------- Part 1: Add identifications made post-field season ----------------------------
 #Based on review documented in Unknown Veg Notes -----------------------------------------------------
@@ -36,7 +36,7 @@ all_plots_understory <- all_plots_understory %>% mutate(hitNum = case_when(
 unkVeg <- read_csv("/Users/jennifercribbs/Documents/R-Projects/MultipleDisturbances/dataSandbox/CleanData/Unknown Veg Notes - UnknownPlants.csv")
 names(unkVeg) <- gsub(" ", "_", names(unkVeg))
 #keep only relevant columns and YOSE rows
-unkVeg <- unkVeg %>% select(project, asEntered, code, bestGuess, confidentTo, nextSteps, plotID) %>% filter(project == "YOSE")
+unkVeg <- unkVeg %>% dplyr::select(project, asEntered, code, bestGuess, confidentTo, nextSteps, plotID) %>% filter(project == "YOSE")
 
 #Create unique columns by plotID and species in each df to merge
 unkVeg <- unkVeg %>% mutate(
@@ -51,7 +51,7 @@ all_plots_understory <- all_plots_understory %>%
     nextSteps %in% c("ID'ed", "Not ID-able") ~ bestGuess, #need to clean up bestGuess column before using - or use Code?
     is.na(bestGuess) ~ species, #double check that this worked...
     TRUE ~ species
-  )) %>% select(plotID.x, dOut_m, pin_vs_assoc, species, confidentTo, hitNum) %>% rename(plotID = plotID.x)
+  )) %>% dplyr::select(plotID.x, dOut_m, pin_vs_assoc, species, confidentTo, hitNum) %>% rename(plotID = plotID.x)
 
 ##-------------------------- Part 2: clean data "manually" in R ----------------------------
 #Includes fixing misspellings and incorrect entries or common names-------------------------
@@ -280,7 +280,7 @@ names(spDict) <- gsub("`", "", names(spDict))
 #spDict <- spDict %>% mutate(inProject = case_when(
   #!is.na(...12) ~ paste(inProject, ...12, sep = ", "),
   #TRUE ~ inProject)) %>% 
-  #select(code, scientificName, lifeForm, nativeVsIntroduced, annualVsPerennial, inProject)
+  #dplyr::select(code, scientificName, lifeForm, nativeVsIntroduced, annualVsPerennial, inProject)
 
 #use merge to map codes in dictionary to codes in df
 #all_plots_understory <- merge(all_plots_understory, spDict, by.x = "species", by.y = "code", all.x = T) #CHANGE BACK TO TRUE to keep all vals
@@ -288,12 +288,12 @@ names(spDict) <- gsub("`", "", names(spDict))
   #mutate(species = case_when(
     #!is.na(all_plots_understory$scientificName) ~ all_plots_understory$scientificName, #is.na doesn't work still - converts a bunch of data to na
     #TRUE ~ species
- # )) %>% select(!scientificName)
+ # )) %>% dplyr::select(!scientificName)
 
 #check species names
 unique(all_plots_understory$species)
 
-# speciesList <- all_plots_understory %>% select(species) %>% unique
+# speciesList <- all_plots_understory %>% dplyr::select(species) %>% unique
 # write_csv(speciesList, "dataSandbox/CleanData/speciesList.csv")
 
 # MOVE TO SEPARATE SCRIPT 
@@ -315,7 +315,7 @@ rm(LCVP1, LCVP2, LCVP3)
 #use U.Taxonstand to spell check scientific names (takes a second)
 nameMatchLCVP <- nameMatch(spList=all_plots_understory$species, spSource=LCVP, author = TRUE, max.distance= 4)
 #keep only rows with fuzzy matching
-nameMatchLCVPFuzzy <- nameMatchLCVP %>% select(Submitted_Name, Fuzzy, Name_in_database) %>% filter(Fuzzy == TRUE) %>% distinct()
+nameMatchLCVPFuzzy <- nameMatchLCVP %>% dplyr::select(Submitted_Name, Fuzzy, Name_in_database) %>% filter(Fuzzy == TRUE) %>% distinct()
 
 #U.Taxonstand WP database
 WP1 <- read_csv("C:/Users/tazli/Downloads/YOSE_SugarPine/MultipleDisturbances/dataSandbox/Dictionaries/Plants_WP_database_part1.csv", show_col_types = FALSE)
@@ -327,7 +327,7 @@ rm(WP1, WP2, WP3)
 #use U.Taxonstand to spell check scientific names (takes a second)
 nameMatchWP <- nameMatch(spList=all_plots_understory$species, spSource=WP, author = TRUE, max.distance= 4)
 #keep only rows with fuzzy matching
-nameMatchWPFuzzy <- nameMatchWP %>% select(Submitted_Name, Fuzzy, Name_in_database) %>% filter(Fuzzy == TRUE) %>% distinct()
+nameMatchWPFuzzy <- nameMatchWP %>% dplyr::select(Submitted_Name, Fuzzy, Name_in_database) %>% filter(Fuzzy == TRUE) %>% distinct()
 
 #U.Taxonstand WFO database
 load("dataSandbox/Dictionaries/Plants_WFO.rdata") 
@@ -335,7 +335,7 @@ WFO <- database
 rm(database)
 
 nameMatchWFO <- nameMatch(spList=all_plots_understory$species, spSource=WFO, author = TRUE, max.distance= 4)
-nameMatchWFOFuzzy <- nameMatchWFO %>% select(Submitted_Name, Fuzzy, Name_in_database) %>% filter(Fuzzy == TRUE) %>% distinct()
+nameMatchWFOFuzzy <- nameMatchWFO %>% dplyr::select(Submitted_Name, Fuzzy, Name_in_database) %>% filter(Fuzzy == TRUE) %>% distinct()
 
 #match accepted names to the misspelled rows
 all_plots_understory <- merge(all_plots_understory, nameMatchFuzzy, by.x = "species", by.y = "Submitted_Name", all.x = TRUE)
@@ -343,7 +343,7 @@ all_plots_understory <- merge(all_plots_understory, nameMatchFuzzy, by.x = "spec
 all_plots_understory <- all_plots_understory %>% mutate(species = case_when(
   !is.na(Name_in_database) & Fuzzy == TRUE ~ Name_in_database, 
   TRUE ~ species
-)) %>% select(species, plotID, dOut_m, pin_vs_assoc)
+)) %>% dplyr::select(species, plotID, dOut_m, pin_vs_assoc)
 
 #Address name changes: What standard to use? 
 # all_plots_understory <- all_plots_understory %>% 

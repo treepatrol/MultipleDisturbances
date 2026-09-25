@@ -97,4 +97,4 @@ spellcheck <- understory_plot_combined %>%
 scinames <- spellcheck %>% 
   mutate(species = case_when(
     species == "grass" ~ "Poaceae"
-  )
+  ))

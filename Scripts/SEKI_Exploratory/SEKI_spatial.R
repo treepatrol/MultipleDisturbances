@@ -6,21 +6,27 @@
 library('terra')
 library('rnaturalearth')
 library('sf')
+library('tidyverse')
 
 # Define goal: where in San Francisco is it safest during an earthquake
 # Avoid trees that could fall, soil liquifaction, etc. 
 
 # Compile Relevant Data
-# load spat vector (specific to terra) data for precip
-precip <- vect('.shp')
+# load raster data from PRISM for precip
+precip <- rast('/Users/jennifercribbs/Documents/R-Projects/climate-data/data/prism_ppt_us_30s_2020_avg_30y/prism_ppt_us_30s_2020_avg_30y.tif')
 # quick look at the spatial vector data
-plot(precip, col = 'grey')
+plot(precip)
 # include outline of SEKI
-park <- vect('raw/Intro-To-Desktop-GIS-with-QGIS/Shoreline.shp')
-plot(park, col = 'darkgreen') # polygons can be filled with color
+seki <- st_read('/Users/jennifercribbs/Documents/R-Projects/climate-data/data/nps_boundary/nps_boundary.shp') %>% filter(UNIT_CODE == "KICA" | UNIT_CODE == "SEQU")
+# dissolve 2 polygons in sf might be union
+plot(seki)
+
+#clip or crop
+test <- terra::extract(precip, seki)
+plot(test)
 
 # load csv file for trees (not spatial in original form)
-trees_df <- read.csv('raw/Intro-To-Desktop-GIS-with-QGIS/Street_Tree_Map.csv')
+trees_df <- read.csv('/Users/jennifercribbs/Documents/R-Projects/MultipleDisturbances/Data/RawData/SEKI_Data/SEKI_2024_TreeFieldData.xlsx')
 # convert to a spatial object
 trees <- vect(trees_df, geom=c('Longitude', 'Latitude'), crs = 'EPSG:4326')
 plot(trees) 

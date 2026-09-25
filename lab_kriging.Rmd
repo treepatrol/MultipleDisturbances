@@ -1,0 +1,29 @@
+---
+title: "lab_kriging"
+author: "Jenny Cribbs"
+date: "2026-05-20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# load packages
+library(sf)
+library(gstat)
+library(tidyverse)
+library(tmap)
+library(dismo)
+library(terra)
+
+```
+
+```{r}
+# set working directory
+setwd('/Users/jennifercribbs/Documents/Graduate School/GEO200CN_2026/Assignments/Assignment8/california_temp')
+# bring in data
+aq <- st_read("kriging/airquality.shp")
+```
+

@@ -1,3 +1,6 @@
+# Extract environmental data from PRISM for plot coordinates
+
+# load packages
 library(prism)
 library(terra)
 library(sf)

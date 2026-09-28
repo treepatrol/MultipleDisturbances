@@ -5,22 +5,79 @@
 
 # load data wrangling packages
 library(tidyverse)
-library(readxl)
 library(janitor)
 
 # load raw data
-raw <- read_excel("/Users/jennifercribbs/Documents/R-Projects/MultipleDisturbances/Data/RawData/SEKI_Data/SEKI_2024_TreeFieldData.xlsx")
+raw <- read_csv("/Users/jennifercribbs/Documents/R-Projects/MultipleDisturbances/Data/RawData/SEKI_Data/SEKI_treesAndCores.csv")
+
+# check column names
+names(raw)
+
+# convert to snake case with janitor
+treesAndCores <- janitor::clean_names(raw)
+
+# check column names
+names(treesAndCores)
+
+# create a list of candidate trees
+treeCandidate <- treesAndCores %>%
+  select(
+    plot_name,
+    tree_number,
+    species,
+    dbh,
+    height
+  )
+
+treeCandidate %>%
+  group_by(plot_name, tree_number) %>%
+  summarise(
+    nRows = n(),
+    nSpecies = n_distinct(species, na.rm = TRUE),
+    nDBH = n_distinct(dbh, na.rm = TRUE),
+    nHeight = n_distinct(height, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  filter(
+    nRows > 1,
+    nSpecies > 1 |
+      nDBH > 1 |
+      nHeight > 1
+  )
 
 # select columns for tree table
-tree_core <- raw %>% select()
+tree <- treesAndCores %>% select(
+  plot_name, 
+  tree_number, 
+  species, 
+  easting, 
+  northing, 
+  elevation_m,
+  position_accuracy_ft, 
+  slope, 
+  aspect
+) %>% 
+  rename(
+    species_id = species, 
+    tree_easting = easting, 
+    tree_northing = northing, 
+    slope_tree = slope, 
+    aspect_tree = aspect, 
+    tree_elevation_m = elevation_m
+  ) %>%
+  distinct()
+  
 
-names(tree_core)
-glimpse(tree_core)
+# check for any duplicate plot_name, tree_number combinations
+tree %>%
+  count(plot_name, tree_number, name = "nRows") %>%
+  filter(nRows > 1) # none
 
-tree_core %>%
-  count(plot_name, tree_num, name = "n_rows") %>%
-  count(n_rows)
-
-# adapt this to check the number of multiple cores per tree records
-tree_core %>%
-  filter(n_rows > 1)
+tree %>%
+  semi_join(
+    tree %>%
+      count(plot_name, tree_number) %>%
+      filter(n > 1),
+    by = c("plot_name", "tree_number")
+  ) %>%
+  arrange(plot_name, tree_number)

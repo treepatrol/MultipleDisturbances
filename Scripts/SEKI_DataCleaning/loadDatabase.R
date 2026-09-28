@@ -1,3 +1,4 @@
+library(tidyverse)
 library(DBI)
 library(RPostgres)
 
@@ -22,8 +23,29 @@ load_tree_core <- FALSE
 # --- Load Plot Visit Table ----
 
 # --- Load Tree Table ----
+
+
+
+# if load tree is TRUE above
 if (load_tree) {
-  # load tree.csv
+# load tree data into R evironment  
+  tree <- read_csv(
+    "/Users/jennifercribbs/Documents/R-Projects/MultipleDisturbances/Data/CleanData/treeData.csv"
+  )
+# write it to Postgres database  
+  dbWriteTable(
+    con,
+    Id(schema = "forest_health", table = "tree"),
+    tree,
+    append = TRUE
+  )
+# check the number of rows  
+  n_db <- dbGetQuery(
+    con,
+    "SELECT COUNT(*) AS n FROM forest_health.tree"
+  )
+  
+  print(n_db)
 }
 
 # --- Load Tree Visit Table ----

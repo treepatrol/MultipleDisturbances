@@ -93,3 +93,18 @@ treesAndCores %>%
     nRows = n(),
     nPlotTree = n_distinct(paste(plot_name, tree_number))
   )
+
+# remove plot visit fields from tree table
+tree <- tree %>%
+  left_join(plot_lookup, by = "plot_name") %>%
+  select(
+    -plot_name,
+    -tree_easting,
+    -tree_northing,
+    -position_accuracy_ft
+  )
+
+
+
+# write tree-level data to a csv for loading in database
+write_csv(tree, "/Users/jennifercribbs/Documents/R-Projects/MultipleDisturbances/Data/CleanData/treeData.csv")

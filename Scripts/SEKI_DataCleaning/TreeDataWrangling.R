@@ -2,6 +2,8 @@
 # Input: Tree level data entered from paper data sheets into Google Sheet
 # Code Description: harmonize data entered primarily at the tree core level to accurately represent tree core, tree, and tree visit attributes. 
 # Output: 3 CSV files for tree, tree_visit, and tree_core
+# Jenny Cribbs (with ChatGPT suggestions and review)
+# Updated: 2026-09-28
 
 # load data wrangling packages
 library(tidyverse)
@@ -10,14 +12,8 @@ library(janitor)
 # load raw data
 raw <- read_csv("/Users/jennifercribbs/Documents/R-Projects/MultipleDisturbances/Data/RawData/SEKI_Data/SEKI_treesAndCores.csv")
 
-# check column names
-names(raw)
-
 # convert to snake case with janitor
 treesAndCores <- janitor::clean_names(raw)
-
-# check column names
-names(treesAndCores)
 
 # create a list of candidate trees
 treeCandidate <- treesAndCores %>%
@@ -29,6 +25,7 @@ treeCandidate <- treesAndCores %>%
     height
   )
 
+# check for plot name and tree number combinations with different values of species, dbh, and height (should be zero)
 treeCandidate %>%
   group_by(plot_name, tree_number) %>%
   summarise(
@@ -81,3 +78,18 @@ tree %>%
     by = c("plot_name", "tree_number")
   ) %>%
   arrange(plot_name, tree_number)
+
+# check for expected number of rows
+tree %>%
+  summarise(
+    nTrees = n(),
+    nPlots = n_distinct(plot_name)
+  )
+
+# check candidate trees (1407) versus unique trees (1404)
+# three trees have multiple cores
+treesAndCores %>%
+  summarise(
+    nRows = n(),
+    nPlotTree = n_distinct(paste(plot_name, tree_number))
+  )

@@ -41,7 +41,7 @@ plotCoords <- dbGetQuery(
       p.plot_name,
       pv.beg_easting,
       pv.beg_northing, 
-      pv.visit_date,
+      pv.start_date,
       pv.survey_species,
       pv.survey_stratum
   FROM forest_health.plot p
@@ -54,13 +54,13 @@ plotCoords <- dbGetQuery(
 )
 
 plotCoords <- plotCoords %>%
-  mutate(year = year(visit_date))
+  mutate(year = year(start_date))
 
 # disconnect when done with database
 dbDisconnect(con)
 
 plotCoords <- plotCoords %>%
-  mutate(year = year(visit_date))
+  mutate(year = year(start_date))
 
 # Convert data frame to sf object with UTM projection (zone 11 NAD83)
 utm_sf <- st_as_sf(plotCoords, coords = c("beg_easting", "beg_northing"), crs = 26911) # zone 11, NAD83

@@ -18,7 +18,7 @@ library(patchwork) # for combining figures
 
 # Create SEKI boundary from geodatabase with all NPS boundaries
 # Read in all NPS boundaries
-nps <- st_read("/Users/jennifercribbs/Documents/TreePatrol.org/Analysis/Data/nps_boundary/nps_boundary.shp") 
+nps <- st_read(here("Data", "CleanData", "nps_boundary", "nps_boundary.shp") )
 # filter out sequoia and kings canyon
 SEKI <- nps %>% filter(UNIT_CODE == "SEQU" | UNIT_CODE == "KICA")
 
@@ -462,3 +462,6 @@ ggsave(
   units = "in",
   dpi = 300
 )
+
+
+

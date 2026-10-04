@@ -1,6 +1,7 @@
 # Extract environmental data from PRISM for plot coordinates
 
 # load packages
+library(here) # for tidy relative paths
 library(prism) # to access and work with PRISM data
 library(terra) # spatial analysis, esp raters
 library(sf) # spatial analysis, esp vectors
@@ -22,7 +23,8 @@ nps <- st_read("/Users/jennifercribbs/Documents/TreePatrol.org/Analysis/Data/nps
 SEKI <- nps %>% filter(UNIT_CODE == "SEQU" | UNIT_CODE == "KICA")
 
 # Read in strata breaks
-breaks <- read_csv("/Users/jennifercribbs/Documents/SEKI_beetles/Analysis/Data/quantilesforJenny.csv") %>% rename(strata = number, prism_ppt = quant_value)
+# updated absolute path
+breaks <- read_csv(here("Data", "CleanData", "precipQuantiles.csv")) %>% rename(strata = number, prism_ppt = quant_value)
 
 # connect to database
 con <- dbConnect(

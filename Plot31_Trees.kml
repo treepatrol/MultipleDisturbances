@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="Plot31_Trees" id="Plot31_Trees">
+	<SimpleField name="Zone" type="string"></SimpleField>
+	<SimpleField name="DBH_cm" type="float"></SimpleField>
+	<SimpleField name="Height_m" type="float"></SimpleField>
+	<SimpleField name="Notes" type="string"></SimpleField>
+</Schema>
+<Folder><name>Plot31_Trees</name>
+  <Placemark>
+	<name>1</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">55.8</SimpleData>
+		<SimpleData name="Height_m">14.2</SimpleData>
+		<SimpleData name="Notes">Cones, S facing needles</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516679780302,37.2186879049541</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>2</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">14.2</SimpleData>
+		<SimpleData name="Height_m">14.2</SimpleData>
+		<SimpleData name="Notes">Cones, S facing needles</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.51666815203,37.2186700274038</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>3</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">10.2</SimpleData>
+		<SimpleData name="Height_m">10.2</SimpleData>
+		<SimpleData name="Notes">Cones, S facing needles</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516622180319,37.2186255499805</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>4</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">15.5</SimpleData>
+		<SimpleData name="Height_m">15.5</SimpleData>
+		<SimpleData name="Notes">Cones, E facing needles on transect</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516613078219,37.2187338254473</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>5</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">12.8</SimpleData>
+		<SimpleData name="Height_m">12.8</SimpleData>
+		<SimpleData name="Notes">Cones, S facing needles, by snag</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516590723882,37.2187431249835</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>6</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">10.6</SimpleData>
+		<SimpleData name="Height_m">10.6</SimpleData>
+		<SimpleData name="Notes">Cones, S facing needles</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516610010756,37.2185806396327</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>7</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">11.9</SimpleData>
+		<SimpleData name="Height_m">11.9</SimpleData>
+		<SimpleData name="Notes">Cones, S facing needles</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516591806507,37.2187971905646</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>8</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">14.5</SimpleData>
+		<SimpleData name="Height_m">14.5</SimpleData>
+		<SimpleData name="Notes">Cones, S facing needles, on transect</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516556921717,37.2187435578846</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>9</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">12.4</SimpleData>
+		<SimpleData name="Height_m">12.4</SimpleData>
+		<SimpleData name="Notes">btw 2 saplings</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516453530588,37.2186457362906</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>10</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">8</SimpleData>
+		<SimpleData name="Height_m">8</SimpleData>
+		<SimpleData name="Notes">NULL</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516570173889,37.218842533818</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>11</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">37.4</SimpleData>
+		<SimpleData name="Height_m">12.2</SimpleData>
+		<SimpleData name="Notes">NULL</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516591806507,37.2187971905646</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>12</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">36.3</SimpleData>
+		<SimpleData name="Height_m">8.9</SimpleData>
+		<SimpleData name="Notes">NULL</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516433882529,37.2187901997604</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>13</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">29.4</SimpleData>
+		<SimpleData name="Height_m">12.6</SimpleData>
+		<SimpleData name="Notes">NULL</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516446052027,37.2188351101263</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>14</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">37.9</SimpleData>
+		<SimpleData name="Height_m">12.4</SimpleData>
+		<SimpleData name="Notes">NULL</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516446052027,37.2188351101263</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>15</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">17.5</SimpleData>
+		<SimpleData name="Height_m">6.7</SimpleData>
+		<SimpleData name="Notes">NULL</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.51643370211,37.2187811888296</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>16</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">43.9</SimpleData>
+		<SimpleData name="Height_m">12.8</SimpleData>
+		<SimpleData name="Notes">DTOP</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516489497808,37.2187534345886</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>17</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">10.4</SimpleData>
+		<SimpleData name="Height_m">4</SimpleData>
+		<SimpleData name="Notes">Too small</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516646158606,37.2186973488101</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>18</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">24.1</SimpleData>
+		<SimpleData name="Height_m">6.7</SimpleData>
+		<SimpleData name="Notes">MD on trunk from PICO, 2 big old flags</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516646158606,37.2186973488101</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>19</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">11.9</SimpleData>
+		<SimpleData name="Height_m">5</SimpleData>
+		<SimpleData name="Notes">DTOP</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516646158606,37.2186973488101</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>20</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">4.2</SimpleData>
+		<SimpleData name="Height_m">2.7</SimpleData>
+		<SimpleData name="Notes">NULL</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516646158606,37.2186973488101</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>21</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">15.7</SimpleData>
+		<SimpleData name="Height_m">6.5</SimpleData>
+		<SimpleData name="Notes">NULL</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516646158606,37.2186973488101</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>22</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">4</SimpleData>
+		<SimpleData name="Height_m">3.2</SimpleData>
+		<SimpleData name="Notes">NULL</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516646158606,37.2186973488101</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>23</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">24.5</SimpleData>
+		<SimpleData name="Height_m">7.4</SimpleData>
+		<SimpleData name="Notes">5 dead stems in clump 2,</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516750091419,37.2188222030164</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>24</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">26.6</SimpleData>
+		<SimpleData name="Height_m">7.6</SimpleData>
+		<SimpleData name="Notes">5 dead stems in clump 2, tree piss, below DBH due to growth</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516750091419,37.2188222030164</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>25</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">31.2</SimpleData>
+		<SimpleData name="Height_m">7.7</SimpleData>
+		<SimpleData name="Notes">5 dead stems in clump 2</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516750091419,37.2188222030164</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>26</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">36.2</SimpleData>
+		<SimpleData name="Height_m">8.2</SimpleData>
+		<SimpleData name="Notes">5 dead stems in clump 2</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516750091419,37.2188222030164</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>27</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">7.6</SimpleData>
+		<SimpleData name="Height_m">5</SimpleData>
+		<SimpleData name="Notes">Clump 3</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.51675063279,37.2188492358047</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>28</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">12.6</SimpleData>
+		<SimpleData name="Height_m">8</SimpleData>
+		<SimpleData name="Notes">Clump 3</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.51655908692,37.218851689048</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>29</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">21.2</SimpleData>
+		<SimpleData name="Height_m">9.3</SimpleData>
+		<SimpleData name="Notes">Clump 3</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.51655908692,37.218851689048</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>30</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">25</SimpleData>
+		<SimpleData name="Height_m">10</SimpleData>
+		<SimpleData name="Notes">Clump 3 - Old DTOP</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.51655908692,37.218851689048</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>31</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">25.4</SimpleData>
+		<SimpleData name="Height_m">9.9</SimpleData>
+		<SimpleData name="Notes">Clump 3, DTOP</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.51655908692,37.218851689048</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>32</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">18.6</SimpleData>
+		<SimpleData name="Height_m">9</SimpleData>
+		<SimpleData name="Notes">Clump 3, old flags</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.51655908692,37.218851689048</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>33</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">48.1</SimpleData>
+		<SimpleData name="Height_m">12</SimpleData>
+		<SimpleData name="Notes">Big scar on one side, alone, a few cones</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516478049994,37.2187445679497</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>34</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">13.8</SimpleData>
+		<SimpleData name="Height_m">6.7</SimpleData>
+		<SimpleData name="Notes">Clump 4 - 2 dead stems approx 11-13 DBH, 6 saplings approx 2-4 DBH, many branches below DBH</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516420630545,37.2186912238068</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>35</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">16.8</SimpleData>
+		<SimpleData name="Height_m">6.9</SimpleData>
+		<SimpleData name="Notes">Clump 4 - 2 dead stems approx 11-13 DBH, 6 saplings approx 2-4 DBH, many branches below DBH</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516420630545,37.2186912238068</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>36</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">13.5</SimpleData>
+		<SimpleData name="Height_m">5.9</SimpleData>
+		<SimpleData name="Notes">Clump 4 - 2 dead stems approx 11-13 DBH, 6 saplings approx 2-4 DBH, many branches below DBH</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516420630545,37.2186912238068</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>37</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">10</SimpleData>
+		<SimpleData name="Height_m">5.7</SimpleData>
+		<SimpleData name="Notes">Clump 4 - 2 dead stems approx 11-13 DBH, 6 saplings approx 2-4 DBH, many branches below DBH</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516420630545,37.2186912238068</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>38</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">12.5</SimpleData>
+		<SimpleData name="Height_m">5</SimpleData>
+		<SimpleData name="Notes">Clump 4 - 2 dead stems approx 11-13 DBH, 6 saplings approx 2-4 DBH, many branches below DBH</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516420630545,37.2186912238068</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>39</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">10.6</SimpleData>
+		<SimpleData name="Height_m">6</SimpleData>
+		<SimpleData name="Notes">Clump 5 - flagging and rodent chew</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516503471605,37.2188884542528</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>40</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">19.6</SimpleData>
+		<SimpleData name="Height_m">8.7</SimpleData>
+		<SimpleData name="Notes">Clump 5 - flagging and rodent chew</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516503471605,37.2188884542528</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>41</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">11.1</SimpleData>
+		<SimpleData name="Height_m">6</SimpleData>
+		<SimpleData name="Notes">Clump 5 - flagging and rodent chew</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516499502215,37.2186902137812</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>42</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">20.3</SimpleData>
+		<SimpleData name="Height_m">8.6</SimpleData>
+		<SimpleData name="Notes">Clump 5 - flagging and rodent chew</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516499502215,37.2186902137812</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>43</name>
+	<ExtendedData><SchemaData schemaUrl="#Plot31_Trees">
+		<SimpleData name="Zone">11S</SimpleData>
+		<SimpleData name="DBH_cm">14</SimpleData>
+		<SimpleData name="Height_m">7</SimpleData>
+		<SimpleData name="Notes">Clump 5 - flagging and rodent chew</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.516499502215,37.2186902137812</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>

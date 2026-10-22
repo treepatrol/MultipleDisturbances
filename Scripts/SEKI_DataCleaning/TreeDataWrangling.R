@@ -8,13 +8,14 @@
 # load data wrangling packages
 library(tidyverse)
 library(janitor)
+library(here)
 
 # ---------------------------------------------------------
 # 1. Read and clean raw data
 # ---------------------------------------------------------
 
 # load raw data
-raw <- read_csv("/Users/jennifercribbs/Documents/R-Projects/MultipleDisturbances/Data/RawData/SEKI_Data/SEKI_treesAndCores.csv")
+raw <- read_csv(here("Data", "RawData", "SEKI_Data", "SEKI_treesAndCores.csv"))
 
 # convert to snake case with janitor
 treesAndCores <- janitor::clean_names(raw)
@@ -294,7 +295,73 @@ treeVisit %>%
 
 write_csv(
   treeVisit,
-  "/Users/jennifercribbs/Documents/R-Projects/MultipleDisturbances/Data/CleanData/treeVisit.csv",
+  here("Data", "CleanData", "treeVisit.csv"),
   na = ""
 )
 
+# ---------------------------------------------------------
+# 4. Tree Core Table 
+# ---------------------------------------------------------
+
+# going back to treesAndCores to get A and B cores
+# expecting 1395 cores (1392 with A cores only and 3 with A and B cores)
+
+# check the number of trees with A or B entered 
+treesAndCores %>%
+  count(core, sort = TRUE)
+
+# checked out in SQL it's PICO2c Tree 23--no physical core survived
+treesAndCores %>% filter(core == "Stuck")
+
+# cross check with other core fields
+treesAndCores %>%
+  filter(is.na(core)) %>%
+  summarise(
+    n = n(),
+    tucson_id = sum(!is.na(tucson_id)),
+    straw_label = sum(!is.na(straw_label)),
+    core_height = sum(!is.na(core_height)),
+    core_dbh = sum(!is.na(core_dbh)),
+    core_depth = sum(!is.na(core_depth))
+  )
+
+# use parse number to look for numeric measurements in core columns
+treesAndCores %>%
+  mutate(
+    has_core_label = core %in% c("A", "B"),
+    has_core_measurement =
+      !is.na(suppressWarnings(readr::parse_number(core_height))) |
+      !is.na(suppressWarnings(readr::parse_number(core_dbh))) |
+      !is.na(suppressWarnings(readr::parse_number(core_depth)))
+  ) %>%
+  count(core, has_core_label, has_core_measurement)
+
+# look at the 26 with an A label, but no measurements
+core_label_review <- treesAndCores %>%
+  mutate(
+    has_core_measurement =
+      !is.na(suppressWarnings(readr::parse_number(core_height))) |
+      !is.na(suppressWarnings(readr::parse_number(core_dbh))) |
+      !is.na(suppressWarnings(readr::parse_number(core_depth)))
+  ) %>%
+  filter(
+    core %in% c("A", "B"),
+    !has_core_measurement
+  ) %>%
+  select(
+    year, plot_name, tree_number, dbh, species,
+    tucson_id, core,
+    core_height, core_dbh, core_depth,
+    notes
+  ) %>%
+  arrange(year, plot_name, tree_number)
+
+# check columns with measurements
+treesAndCores %>%
+  mutate(
+    has_core_measurement =
+      !is.na(suppressWarnings(readr::parse_number(core_height))) |
+      !is.na(suppressWarnings(readr::parse_number(core_dbh))) |
+      !is.na(suppressWarnings(readr::parse_number(core_depth)))
+  ) %>%
+  count(has_core_measurement)

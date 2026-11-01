@@ -51,54 +51,32 @@ nrow(tree)
 write_csv(tree, "/Users/jennifercribbs/Documents/R-Projects/MultipleDisturbances/Data/CleanData/tree.csv")
 
 # ---------------------------------------------------------
-# 3. Tree Visit Table 
+# Handle WPBR codes with unspecified activity
 # ---------------------------------------------------------
 
-# review column names
-names(treesAndCores)
-glimpse(treesAndCores)
+# BrC explicitly identifies branch cankers but leaves activity
+# unspecified. Store the count separately; do not split it.
+#
+# BC is ambiguous about both location and activity.
+# For "4IBC, 1BC" only, interpret the note as 4 inactive branch
+# cankers and 1 bole canker of unspecified activity.
+#
+# Retain the original note for auditability.
+# As in the initial parser, unmentioned categories remain NA.
 
-# parse wpbr notes colum with regex
-treeVisit <- treesAndCores %>%
+treeVisit <- treeVisit %>%
   mutate(
-    wpbr_active_branch = as.numeric(str_extract(
-      wpbr, regex("\\d+\\s*[Aa][Bb][Rr][Cc]")
-    ) |> str_extract("\\d+")),
-    
-    wpbr_inactive_branch = as.numeric(str_extract(
-      wpbr, regex("\\d+\\s*[Ii][Bb][Rr][Cc]")
-    ) |> str_extract("\\d+")),
-    
-    wpbr_active_bole = as.numeric(str_extract(
-      wpbr, regex("\\d+\\s*[Aa][Bb][Oo][Cc]")
-    ) |> str_extract("\\d+")),
-    
-    wpbr_inactive_bole = as.numeric(str_extract(
-      wpbr, regex("\\d+\\s*[Ii][Bb][Oo][Cc]")
-    ) |> str_extract("\\d+")),
-    # fill flags column
-    flags = as.integer(
+    wpbr_unspecified_branch = as.integer(
       str_extract(
         wpbr,
-        regex("\\d+\\s*flags?", ignore_case = TRUE)
+        regex("\\b\\d+\\s*BrC\\b", ignore_case = TRUE)
       ) |> str_extract("\\d+")
     ),
-    # populate dead top column
-    dead_top = case_when(
-      str_detect(wpbr, regex("\\b(dead\\s+top|dtop)\\b", ignore_case = TRUE)) ~ TRUE,
-      !is.na(wpbr) ~ FALSE,
-      TRUE ~ NA
-    )
-  )
-
-# Ambiguous WPBR codes:
-# "BrC" indicates a branch canker but does not specify active/inactive.
-# "BC" indicates a bole canker but does not specify active/inactive.
-# Split ambiguous counts equally between the two categories rather than
-# assigning them arbitrarily. The original source notation is retained
-# in wpbr_extra_notes for auditability.
-
-treeVisit <- treeVisit %>% mutate(
+    
+    wpbr_unspecified_bole = case_when(
+      wpbr == "4IBC, 1BC" ~ 1L,
+      TRUE ~ NA_integer_
+    ),
     
     wpbr_inactive_branch = case_when(
       wpbr == "4IBC, 1BC" ~ 4,
@@ -107,36 +85,38 @@ treeVisit <- treeVisit %>% mutate(
     
     wpbr_active_branch = case_when(
       wpbr == "4IBC, 1BC" ~ 0,
-      TRUE ~ wpbr_inactive_branch
+      TRUE ~ wpbr_active_branch
     ),
     
     wpbr_active_bole = case_when(
-      wpbr == "4IBC, 1BC" ~ 0.5,
+      wpbr == "4IBC, 1BC" ~ NA_real_,
       TRUE ~ wpbr_active_bole
     ),
     
     wpbr_inactive_bole = case_when(
-      wpbr == "4IBC, 1BC" ~ 0.5,
+      wpbr == "4IBC, 1BC" ~ NA_real_,
       TRUE ~ wpbr_inactive_bole
-    )
-  )
-# check
-treeVisit %>%
-  filter(wpbr %in% c("4IBC, 1BC")) %>%
-  select(
-    wpbr,
-    wpbr_active_branch,
-    wpbr_inactive_branch,
-    wpbr_active_bole,
-    wpbr_inactive_bole
-  ) %>%
-  print(width = Inf)
-
-# retain the full wpbr note
-treeVisit <- treeVisit %>%
-  mutate(
+    ),
+    
     wpbr_extra_notes = wpbr
   )
+
+# Review unspecified counts and the specific exception
+treeVisit %>%
+  filter(
+    !is.na(wpbr_unspecified_branch) |
+      !is.na(wpbr_unspecified_bole)
+  ) %>%
+  select(
+    wpbr_extra_notes,
+    wpbr_active_branch,
+    wpbr_inactive_branch,
+    wpbr_unspecified_branch,
+    wpbr_active_bole,
+    wpbr_inactive_bole,
+    wpbr_unspecified_bole
+  ) %>%
+  print(n = Inf, width = Inf)
 
 # select columns for tree_visit table
 treeVisit <- treeVisit %>% select(
@@ -236,7 +216,9 @@ treeVisit <- treeVisit %>%
     visit_date,
     tree_easting,
     tree_accuracy_ft,
-    species_code
+    species_code,
+    wpbr_unspecified_branch,
+    wpbr_unspecified_bole
   )
 
 # check for trees with the same plotid, treeid, species, and visit date (3 B cores)

@@ -9,6 +9,15 @@ library(dplyr)
 library(readr)
 library(DBI)
 library(RPostgres)
+library(here)
+library(stringr)
+
+# bring in the treesAndCores monstrosity
+treesAndCores <- read_csv(
+  here("Data", "RawData", "SEKI_Data", "SEKI_treesAndCores.csv"),
+  show_col_types = FALSE
+) %>%
+  janitor::clean_names()
 
 # connect to database, 
 con <- dbConnect(
@@ -43,38 +52,14 @@ plot_lookup <- DBI::dbGetQuery(
   WHERE p.site_id = '1';
   "
 )
-
+# join plot look up with trees and cores data
 core_deposition <- treesAndCores %>% 
-  left_join(plot_lookup, by = c("plot_name", ""))
-
-# look up tree id
-visit_tree_lookup <- DBI::dbGetQuery(
-  con,
-  "
-  SELECT
-      tv.tree_visit_id,
-      tv.tree_id,
-      tv.plot_visit_id,
-      t.tree_number,
-      s.species_code
-  FROM forest_health.tree_visit AS tv
-  JOIN forest_health.tree AS t
-      ON tv.tree_id = t.tree_id
-  JOIN forest_health.species AS s
-      ON t.species_id = s.species_id;
-  "
-)
-
-core_deposition <- core_deposition %>%
-  left_join(
-    visit_tree_lookup,
-    by = c(
-      "plot_visit_id",
-      "tree_number",
-      "species" = "species_code"
-    )
-  )
-
+  left_join(plot_lookup, 
+            by = c("plot_name" = "source_plot_name"),
+            relationship = "many-to-one"
+            )
+# stop if plot names are unmatched
+stopifnot(!anyNA(core_deposition$plot_id))
 #_________________
 
 # create a spreadsheet of possible cores to get started with physical inventory
@@ -126,7 +111,7 @@ check <- treesAndCores %>%
     )
   ) %>%
   select(
-    plot_name, tree_number, tree_id, tree_visit_id, species,
+    plot_name, tree_number, species,
     tucson_id, core, core_height, core_dbh,
     core_depth, dbh, notes
   )
@@ -188,8 +173,6 @@ core_inventory <- core_deposition %>%
     plot_id,
     plot_name, 
     tree_number, 
-    tree_id,
-    tree_visit_id,
     species,
     
     # Existing raw core information
@@ -210,7 +193,7 @@ core_inventory <- core_deposition %>%
     core_present = NA_character_,
     straw_dbh = NA_real_,
     straw_label = NA_character_,
-    physical_piece = NA_character_,
+    physical_pieces = NA_character_,
     inventory_notes = NA_character_,
     
     # Preserve full original notes
@@ -225,10 +208,13 @@ plot_check <- core_inventory %>%
   count(plot_name, inventory_reason) %>% 
   arrange(plot_name, inventory_reason)
 
-# print
-print <- core_inventory %>% arrange(plot_name, inventory_reason)
+# write out CSV
+core_inventory_export <- core_inventory %>% arrange(plot_name, inventory_reason)
 write_csv(
-  print,
-  here("core_inventory_check.csv"),
+  core_inventory_export,
+  here("core_inventory_export.csv"),
   na = ""
 )
+
+# close database connection
+dbDisconnect(con)

@@ -3,7 +3,7 @@ library(here)
 library(readr)
 
 # load results of physical core inventory
-core_inventory <- read_csv(here("Data", "RawData", "SEKI_Data","core_inventory_check.csv"))
+core_inventory <- read_csv(here("Data", "RawData", "SEKI_Data","core_inventory.csv"))
 # check column names
 names(core_inventory)
 # load trees from 3 plots to add and review
@@ -44,5 +44,5 @@ core_inventory_add3plots <- bind_rows(core_inventory, addendum) %>%
 
 # write out updated inventory sheet for manual review
 write_csv(core_inventory_add3plots,
-          here ("Data", "core_inventory_updated20261115"), 
+          here ("Data", "core_inventory_updated20261115.csv"), 
           na = "")

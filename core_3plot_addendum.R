@@ -1,3 +1,6 @@
+# Three plots were ommitted from original data entry
+# This script loads the existing inventory and adds the three plots
+
 library(dplyr)
 library(here)
 library(readr)
